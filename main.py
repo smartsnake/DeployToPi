@@ -4,7 +4,9 @@ import docker
 
 
 DIR_NAME = "Test"
-REMOTE_URL = 'https://github.com/smartsnake/DeploymentTest.git'#Change this to whatever docker repo on github
+
+#Change this to whatever docker repo on github
+REMOTE_URL = 'https://github.com/smartsnake/DeploymentTest.git'
 latestCommitFile = 'latest.commit'
 WorkingDir = 'Deploy'
 
