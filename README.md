@@ -3,6 +3,7 @@ Python script to check and deploy your code onto a raspberry pi (can work on any
 
 #### Set-up:
 Make sure you clone to your raspberry pi(or other computer) 
+
 `git clone https://github.com/smartsnake/DeployToPi.git`
 
 #### Requirments:
