@@ -1,6 +1,6 @@
 from git import Repo
 import os, shutil
-import docker
+#import docker
 import subprocess
 
 DIR_NAME = "Test"
@@ -48,6 +48,9 @@ while True:
         thing.close()
         latestCommit = repo.head.commit
 
+        #Problem.
+        # This method will build and run at the same time.
+        # Need to change and have the run command wait for the new build to finish
         build = subprocess.Popen(['docker', 'build', '-t', f'{DockerImageName}', f'{WorkingDir}/'], 
                         stdout=subprocess.PIPE)
         program = subprocess.Popen(['docker', 'run', f'{DockerImageName}'], 
