@@ -51,16 +51,8 @@ while True:
         program = subprocess.Popen(['docker', 'run', f'{DockerImageName}'], 
                         stdout=subprocess.PIPE)
 
-        # print(program.stdout)
 
         print(f'{DockerImageName} is deployed.')
         print('Checking for new commits...')
-        # client = docker.from_env()
-        # image, logs = client.images.build(path=WorkingDir)
-        # print(logs)
-        # logs = client.containers.run(image)
-        # print(logs)
-
-
 
 
