@@ -11,6 +11,8 @@ latestCommitFile = 'latest.commit'
 WorkingDir = 'Deploy'
 DockerImageName = 'program'
 
+debug = True
+
 if os.path.isdir(DIR_NAME):
     shutil.rmtree(DIR_NAME)
 os.mkdir(DIR_NAME)
@@ -51,6 +53,13 @@ while True:
         program = subprocess.Popen(['docker', 'run', f'{DockerImageName}'], 
                         stdout=subprocess.PIPE)
 
+        if debug:
+            print(build.stdout)
+            print(program.stdout)
+        if build.stderr != None or program.stderr != None:
+            print('There was a problem...')
+            print(f'ERROR: {build.stderr}')
+            print(f'STDOUT: {program.stderr}')
 
         print(f'{DockerImageName} is deployed.')
         print('Checking for new commits...')
