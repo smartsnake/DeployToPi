@@ -48,21 +48,20 @@ while True:
         thing.close()
         latestCommit = repo.head.commit
 
-        #Problem.
-        # This method will build and run at the same time.
-        # Need to change and have the run command wait for the new build to finish
-        build = subprocess.Popen(['docker', 'build', '-t', f'{DockerImageName}', f'{WorkingDir}/'], 
-                        stdout=subprocess.PIPE)
-        program = subprocess.Popen(['docker', 'run', f'{DockerImageName}'], 
-                        stdout=subprocess.PIPE)
+        if debug:
+            print('Deleting old container')
+        deletingContainer = subprocess.call(['docker', 'rm', '-f', f'{DockerImageName}'])
 
         if debug:
-            print(build.stdout)
-            print(program.stdout)
-        if build.stderr != None or program.stderr != None:
-            print('There was a problem...')
-            print(f'ERROR: {build.stderr}')
-            print(f'STDOUT: {program.stderr}')
+            print('Building image...')
+        build = subprocess.call(['docker', 'build', '-t', f'{DockerImageName}', f'{WorkingDir}/'])
+        
+        if debug:
+            print('Running image...')
+        program = subprocess.call(['docker', 'run', f'--name={DockerImageName}', f'{DockerImageName}'])
+
+        logs = subprocess.Popen(['docker', 'logs', '-f', f'{DockerImageName}'],
+                        stdout=subprocess.PIPE)
 
         print(f'{DockerImageName} is deployed.')
         print('Checking for new commits...')
