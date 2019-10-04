@@ -18,7 +18,8 @@ Make sure you clone to your raspberry pi(or other computer)
 * Improve the README.md
 * Change the method of checking the latest commit to a web-hook method.
 * Add support for checking more than one repo.
-* Change how the program starts the docker image, so it can run on a new process.
+* Add support for arguments to be passed to docker.
+* Add logging support
 
 ## Built With
 [Docker](https://github.com/docker/docker-py) - Used to build and run docker images.

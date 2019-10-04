@@ -1,7 +1,7 @@
 from git import Repo
 import os, shutil
 import docker
-
+import subprocess
 
 DIR_NAME = "Test"
 
@@ -9,6 +9,7 @@ DIR_NAME = "Test"
 REMOTE_URL = 'https://github.com/smartsnake/DeploymentTest.git'
 latestCommitFile = 'latest.commit'
 WorkingDir = 'Deploy'
+DockerImageName = 'program'
 
 if os.path.isdir(DIR_NAME):
     shutil.rmtree(DIR_NAME)
@@ -45,11 +46,20 @@ while True:
         thing.close()
         latestCommit = repo.head.commit
 
-        client = docker.from_env()
-        image, logs = client.images.build(path=WorkingDir)
-        print(logs)
-        logs = client.containers.run(image)
-        print(logs)
+        build = subprocess.Popen(['docker', 'build', '-t', f'{DockerImageName}', f'{WorkingDir}/'], 
+                        stdout=subprocess.PIPE)
+        program = subprocess.Popen(['docker', 'run', f'{DockerImageName}'], 
+                        stdout=subprocess.PIPE)
+
+        # print(program.stdout)
+
+        print(f'{DockerImageName} is deployed.')
+        print('Checking for new commits...')
+        # client = docker.from_env()
+        # image, logs = client.images.build(path=WorkingDir)
+        # print(logs)
+        # logs = client.containers.run(image)
+        # print(logs)
 
 
 
