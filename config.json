@@ -1,0 +1,16 @@
+[
+    {
+        "REMOTE_URL" : "https://github.com/smartsnake/DeploymentTest.git",
+        "latestCommitFile" : ".commit",
+        "WorkingDir" : "Deploy",
+        "DockerImageName" : "program",
+        "latestCommit" : "None"
+    },
+    {
+        "REMOTE_URL" : "https://github.com/smartsnake/Fetch_Coinbase_Pro_Price.git",
+        "latestCommitFile" : ".commit",
+        "WorkingDir" : "Deploy",
+        "DockerImageName" : "fetch_coinbase_pro_price",
+        "latestCommit" : "None"
+    }
+]
