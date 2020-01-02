@@ -1,3 +1,4 @@
 
 Deploy/
 *.commit
+.DS_Store

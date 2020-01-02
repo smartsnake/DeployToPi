@@ -8,7 +8,7 @@ import sys
 import time
 
 def setup(config):
-    DIR_NAME = "Test"
+    DIR_NAME = "Deployment"
     logging.info(f"Thread {config['DockerImageName']}    : Started thread.")
     #Change this to whatever docker repo on github
     REMOTE_URL = config['REMOTE_URL']#'https://github.com/smartsnake/DeploymentTest.git'
@@ -19,14 +19,14 @@ def setup(config):
 
     debug = True
 
-    if os.path.isdir(DIR_NAME):
-        shutil.rmtree(DIR_NAME)
-    os.mkdir(DIR_NAME)
+    if os.path.isdir(DockerImageName + DIR_NAME):
+        shutil.rmtree(DockerImageName + DIR_NAME)
+    os.mkdir(DockerImageName + DIR_NAME)
 
     # if os.path.exists(latestCommitFile):
     #     latestCommit = open(latestCommitFile, 'r').read()
     if latestCommit == 'None':
-        repo = Repo.clone_from(REMOTE_URL, DIR_NAME)#Location of git project that needs
+        repo = Repo.clone_from(REMOTE_URL, DockerImageName + DIR_NAME)#Location of git project that needs
         latestCommit = repo.head.commit
         thing = open(latestCommitFile, 'w')
         thing.write(str(latestCommit))
@@ -38,10 +38,10 @@ def setup(config):
     logging.info(f"Thread {config['DockerImageName']}    : Checking for new commits...")
 
     while True:
-        if os.path.isdir(DIR_NAME):
-            shutil.rmtree(DIR_NAME)
-        os.mkdir(DIR_NAME)
-        repo = Repo.clone_from(REMOTE_URL, DIR_NAME)#Location of git project that needs
+        if os.path.isdir(DockerImageName + DIR_NAME):
+            shutil.rmtree(DockerImageName + DIR_NAME)
+        os.mkdir(DockerImageName + DIR_NAME)
+        repo = Repo.clone_from(REMOTE_URL, DockerImageName + DIR_NAME)#Location of git project that needs
         newCommit = repo.head.commit
         if str(newCommit) != str(latestCommit):
             logging.info(f"Thread {config['DockerImageName']}    : Updating Program!")
